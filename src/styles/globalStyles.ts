@@ -14,10 +14,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: var(--grey);
     font-family: Inter, Sans-Serif;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
   }
 
   button:hover {

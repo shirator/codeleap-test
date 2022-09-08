@@ -1,23 +1,15 @@
 import { api } from "../../actions/api";
 import { MainScreenModalWrapper } from "./style";
 import { useEffect, useState } from "react";
+import { AllPropsProps } from "../../interfaces";
 import Posts from "./../Posts";
-
-interface Props {
-  id: number;
-  username: string;
-  title: string;
-  content: string;
-  created_datetime: string;
-}
 
 const MainScreenModal = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
-  const [allPosts, setAllPosts] = useState<Props[]>([]);
-
-  const username: string = localStorage.getItem("username")!;
+  const [allPosts, setAllPosts] = useState<AllPropsProps[]>([]);
+  const username = localStorage.getItem("username")!;
 
   useEffect(() => {
     if (title === "" || content === "") {
@@ -28,19 +20,14 @@ const MainScreenModal = () => {
   }, [title, content]);
 
   useEffect(() => {
-    api
-      .get("/careers/")
-      .then((res) => setAllPosts(res.data.results))
-      .catch((err) => console.log(err));
+    api.get("/careers/").then((res) => {
+      setAllPosts(res.data.results);
+    });
   }, [allPosts]);
 
-  const createPost = async (
-    username: string,
-    title: string,
-    content: string
-  ): Promise<void> => {
+  const createPost = (username: string, title: string, content: string) => {
     const postContent = { username, title, content };
-    await api.post("/careers/", postContent).catch((err) => console.log(err));
+    api.post("/careers/", postContent);
   };
 
   return (

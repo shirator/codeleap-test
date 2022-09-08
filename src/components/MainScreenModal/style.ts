@@ -25,11 +25,10 @@ export const MainScreenModalWrapper = styled.main<Props>`
   }
 
   .posts {
-    height: 600px;
-    overflow-y: auto;
-
     display: flex;
     flex-direction: column;
+    height: 450px;
+    overflow-y: scroll;
     gap: 50px;
 
     ::-webkit-scrollbar-track {
@@ -44,6 +43,7 @@ export const MainScreenModalWrapper = styled.main<Props>`
       background-color: var(--black);
     }
   }
+  
   .createPost {
     border: 2px solid var(--grey);
     border-radius: var(--radius);

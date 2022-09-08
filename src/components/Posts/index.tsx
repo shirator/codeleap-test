@@ -20,8 +20,6 @@ const Posts = ({ post }: Props) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [targetId, setTargetId] = useState<number>(0);
-  const [content, setContent] = useState<string>(post.content);
-  const [title, setTitle] = useState<string>(post.title);
 
   return (
     <StyledPosts>
@@ -34,8 +32,8 @@ const Posts = ({ post }: Props) => {
         showEditModal={showEditModal}
         setShowEditModal={setShowEditModal}
         targetId={targetId}
-        content={content}
-        title={title}
+        content={post.content}
+        title={post.title}
       />
       <header>
         <h1>{post.title}</h1>

@@ -1,14 +1,7 @@
 import { EditWrapper } from "./style";
 import { api } from "../../actions/api";
 import { useState } from "react";
-
-interface Props {
-  showEditModal: boolean;
-  setShowEditModal: (value: boolean) => void;
-  targetId: number;
-  content: string;
-  title: string;
-}
+import { EditProps } from "../../interfaces";
 
 const EditModal = ({
   showEditModal,
@@ -16,18 +9,18 @@ const EditModal = ({
   targetId,
   content,
   title,
-}: Props) => {
+}: EditProps) => {
+  const [newData, setNewData] = useState({ title, content });
+
   if (!showEditModal) return null;
 
-  const [newContent, setNewContent] = useState(content);
-  const [newTitle, setNewTitle] = useState(title);
-
   const editPost = (targetId: number) => {
-    const newData = { content: newContent, title: newTitle };
     api
       .patch(`/careers/${targetId}/`, newData)
-      .then((res) => setShowEditModal(false));
+      .then(() => setShowEditModal(false));
+    console.log(newData);
   };
+
   return (
     <EditWrapper>
       <div className="modalContent">
@@ -39,7 +32,9 @@ const EditModal = ({
               type="text"
               placeholder="Edit your title"
               defaultValue={title}
-              onChange={(e) => setNewTitle(e.target.value)}
+              onChange={(e) =>
+                setNewData({ ...newData, title: e.target.value })
+              }
             />
           </label>
           <label>
@@ -47,7 +42,9 @@ const EditModal = ({
             <textarea
               placeholder="Edit your content"
               defaultValue={content}
-              onChange={(e) => setNewContent(e.target.value)}
+              onChange={(e) =>
+                setNewData({ ...newData, content: e.target.value })
+              }
             ></textarea>
           </label>
           <div className="buttons">

@@ -9,8 +9,8 @@ export const SignupModalWrapper = styled.div<Props>`
   flex-direction: column;
   background: #fff;
   width: 500px;
-  height: 220px;
-  border: 1px solid #ccc;
+  padding: 30px;
+  justify-content: center;
 
   h2 {
     text-align: left;
@@ -52,6 +52,25 @@ export const SignupModalWrapper = styled.div<Props>`
         text-transform: uppercase;
         font-weight: bold;
       }
+    }
+  }
+
+  @media screen and (max-width: 590px) {
+    width: 100%;
+    height: 300px;
+    gap: 50px;
+
+    form {
+      label {
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    h2 {
+      text-align: center;
+      padding: 0;
     }
   }
 `;

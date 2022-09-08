@@ -1,17 +1,12 @@
 import { DeleteWrapper } from "./style";
 import { api } from "../../actions/api";
-
-interface Props {
-  showDeleteModal: boolean;
-  setShowDeleteModal: (value: boolean) => void;
-  targetId: number;
-}
+import { DeleteProps } from "../../interfaces";
 
 const DeleteModal = ({
   showDeleteModal,
   setShowDeleteModal,
   targetId,
-}: Props) => {
+}: DeleteProps) => {
   if (!showDeleteModal) return null;
 
   const deletePost = (targetId: number) => {
